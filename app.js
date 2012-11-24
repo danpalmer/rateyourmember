@@ -39,6 +39,7 @@ app.router.get('/', function() {
   self.res.writeHead(200, { 'Content-Type': 'text/html' });
   runTemplate('index', {
     mp: images[mp].photo,
+    name: images[mp].name
   }, function(res) {
     self.res.end(res);
   });
