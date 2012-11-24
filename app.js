@@ -1,5 +1,6 @@
 var flatiron = require("flatiron");
 var fs = require('fs');
+var HB = require('handlebars');
 var images = require('./photos').all;
 var app = flatiron.app;
 var redis;
@@ -12,16 +13,35 @@ if (process.env.REDISTOGO_URL) {
   redis = require("redis").createClient();
 }
 
-app.use(flatiron.plugins.http, {
-  // HTTP options
-});
+var templates = {};
+function runTemplate(name, data, cb) {
+
+  function run(template) {
+    cb(template(data));
+  }
+
+  if (templates[name]) {
+    run(templates[name]);
+  } else {
+    var str = fs.readFileSync('templates/' + name + '.html');
+    var template = HB.compile(str.toString());
+    templates[name] = template;
+    run(template);
+  }
+}
+
+app.use(flatiron.plugins.http);
 
 app.router.get('/', function() {
-  var mp1 = Math.floor(Math.random() * images.length);
-  var mp2 = Math.floor(Math.random() * images.length);
+  var self = this;
+  var mp = Math.floor(Math.random() * images.length);
 
-  this.res.writeHead(200, { 'Content-Type': 'text/plain' });
-  this.res.end(mp1 + '\n' + mp2);
+  self.res.writeHead(200, { 'Content-Type': 'text/html' });
+  runTemplate('index', {
+    mp: images[mp].photo,
+  }, function(res) {
+    self.res.end(res);
+  });
 });
 
 app.start(process.env.PORT || 3000);

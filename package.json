@@ -10,7 +10,8 @@
   "dependencies": {
     "flatiron": "*",
     "redis": "*",
-    "union": "*"
+    "union": "*",
+    "handlebars": "*"
   },
   "author": "Dan Palmer",
   "license": "MIT"
