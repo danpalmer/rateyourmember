@@ -1,0 +1,17 @@
+{
+  "name": "rateyourmember",
+  "version": "0.0.0",
+  "description": "Rate Your Member of Parliament",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git@heroku.com:rateyourmember.git"
+  },
+  "dependencies": {
+    "flatiron": "*",
+    "redis": "*",
+    "union": "*"
+  },
+  "author": "Dan Palmer",
+  "license": "MIT"
+}
