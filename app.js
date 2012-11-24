@@ -1,15 +1,15 @@
 var flatiron = require("flatiron");
-var redis = require("redis").createClient();
 var fs = require('fs');
 var images = require('./photos').all;
 var app = flatiron.app;
+var redis;
 
 if (process.env.REDISTOGO_URL) {
   var rtg   = require("url").parse(process.env.REDISTOGO_URL);
-  var redis = require("redis").createClient(rtg.port, rtg.hostname);
+  redis = require("redis").createClient(rtg.port, rtg.hostname);
   redis.auth(rtg.auth.split(":")[1]);
 } else {
-  var redis = require("redis").createClient();
+  redis = require("redis").createClient();
 }
 
 app.use(flatiron.plugins.http, {
