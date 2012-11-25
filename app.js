@@ -7,7 +7,7 @@ var _ = require('underscore');
 var redis;
 
 var ratings = {
-  "1": "<strong>1/5</strong>: Not worth a peerage",
+  "1": "<strong>1/5</strong>: Peerages can be deceiving",
   "2": "<strong>2/5</strong>: I'd consider a mass debate",
   "3": "<strong>3/5</strong>: I'd hand them my sceptre",
   "4": "<strong>4/5</strong>: I'd fiddle their expenses",
