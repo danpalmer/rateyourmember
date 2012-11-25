@@ -122,6 +122,11 @@
         event.preventDefault();
         postIt(event.target.id);
       });
+      document.onkeypress = function(event) {
+        var key = event.keyCode - 48;
+        if (key < 1 || key > 5) { return ; }
+        postIt(key);
+      }
     });
 
     </script>
