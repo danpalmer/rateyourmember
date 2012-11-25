@@ -74,8 +74,10 @@ var post = function() {
   console.log(self.req.body.mp + ' received a vote of ' + voted);
   redis.get(self.req.body.mp, function(err, res) {
     var numScores = res;
+    if (!numScores) { numScores = 0; }
     redis.zscore('scores', self.req.body.mp, function(err, res) {
       var currentScore = res;
+      if (!currentScore) { currentScore = 0; }
       var newScore = ((currentScore * numScores) + voted) / (numScores + 1);
       numScores = numScores + 1;
       redis.set(self.req.body.mp, numScores, function(err, res) {

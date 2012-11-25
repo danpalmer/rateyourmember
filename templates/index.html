@@ -100,7 +100,10 @@
     <script type="text/javascript">
 
     $(function() {
+      var voting = false;
       function postIt(data){
+        if (voting) { return; }
+        else { voting = true; }
         $('body').append($('<form/>', {
           id: 'jQueryPostItForm',
           method: 'POST',
