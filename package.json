@@ -11,7 +11,8 @@
     "flatiron": "*",
     "redis": "*",
     "union": "*",
-    "handlebars": "*"
+    "handlebars": "*",
+    "underscore": "*"
   },
   "author": "Dan Palmer",
   "license": "MIT"

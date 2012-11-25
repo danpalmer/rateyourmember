@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>Rate Your Member (of Parliament)</title>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <style type="text/css">
+
+    body {
+      width: 99%;
+    }
+
+    h1 {
+      font-weight: inherit;
+    }
+
+    .score {
+      width: 400px;
+      text-align: center;
+      font-family: "Gill Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: lighter;
+      font-size: 25px;
+      margin: 60px auto auto auto;
+      clear: both;
+      margin-bottom: 80px;
+    }
+
+    .score img {
+      border: 1px dashed red;
+      padding: 5px;
+      float: left;
+    }
+
+    </style>
+  </head>
+  <body>
+    {{#each scores}}
+      <div class="score">
+        <img src="{{imgurl}}" />
+        <h3>{{name}}</h3>
+        <p>{{{description}}}</p>
+      </div>
+    {{/each}}
+  </body>
+</html>

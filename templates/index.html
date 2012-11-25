@@ -1,7 +1,9 @@
 <html>
   <head>
     <title>Rate Your Member (of Parliament)</title>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <style type="text/css">
+
     body {
       width: 99%;
     }
@@ -11,7 +13,7 @@
     }
 
     #mp {
-      width: 60%;
+      width: 850px;
       text-align: center;
       font-family: "Gill Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-weight: lighter;
@@ -23,12 +25,75 @@
       border: 1px dashed red;
       padding: 5px;
     }
+
+    .voteButtons {
+      width: 100%;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    .voteButton {
+      font-size: 20px;
+      display: inline-block;
+      width: 100px;
+      margin-top:1px;
+      height: 100px;
+      background-color: lightgray;
+      text-decoration: none;
+      color: red;
+      padding: 20px;
+      margin-right: 10px;
+      margin-left: 10px;
+      border: 1px dashed red;
+      float: left;
+    }
+
+    .voteButton:visited {
+      color: red;
+    }
+
     </style>
   </head>
   <body>
     <div id="mp">
       <h1>{{name}}</h1>
       <img src="{{mp}}" />
+      <div class="voteButtons">
+        <a id="1" class="voteButton" href="#">{{{b1}}}</a>
+        <a id="2" class="voteButton" href="#">{{{b2}}}</a>
+        <a id="3" class="voteButton" href="#">{{{b3}}}</a>
+        <a id="4" class="voteButton" href="#">{{{b4}}}</a>
+        <a id="5" class="voteButton" href="#">{{{b5}}}</a>
+      </div>
     </div>
+
+    <script type="text/javascript">
+
+    $(function() {
+      function postIt(data){
+        $('body').append($('<form/>', {
+          id: 'jQueryPostItForm',
+          method: 'POST',
+          action: '/'
+        }));
+        $('#jQueryPostItForm').append($('<input/>', {
+          type: 'hidden',
+          name: 'vote',
+          value: data
+        }));
+        $('#jQueryPostItForm').append($('<input/>', {
+          type: 'hidden',
+          name: 'mp',
+          value: "{{name}}"
+        }));
+        $('#jQueryPostItForm').submit();
+      }
+      $('.voteButton').click(function(event) {
+        event.preventDefault();
+        postIt(event.target.id);
+      });
+    });
+
+    </script>
   </body>
 </html>
